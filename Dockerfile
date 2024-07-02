@@ -1,7 +1,8 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
-RUN apk --no-cache add python3 py3-pip
-RUN pip install authenticator bottle protobuf qrcode Pillow
+RUN apt update
+RUN apt install -y python3 python3-pip gcc
+RUN pip install --break-system-packages authenticator bottle protobuf qrcode Pillow
 
 COPY extract_otp_secret_keys /usr/bin/extract_otp_secret_keys
 
