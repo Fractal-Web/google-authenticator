@@ -1,10 +1,39 @@
+# Prebuilt image
+
+You can use a prebuilt image like this:
+
+```yaml
+version: "3.7"
+
+services:
+  google-authenticator:
+    image: meowlaika/google-authenticator
+    volumes:
+      - ./authenticator/authenticator:/root/.authenticator/
+    ports:
+      - "127.0.0.1:48080:8080"
+```
+
+```sh
+docker compose up -d
+docker compose exec google-authenticator bash
+
+authenticator add Google:youremail@gmail.com
+```
+
+The OTP can be queried like this:
+
+```sh
+curl -XPOST -F passphrase=123456 http://localhost:48080/login
+```
+
 # Google Authenticator container
 
 A Docker container with [Google Authenticator](https://pypi.org/project/authenticator/) to stop being dependent on a cell phone. Import your existing tokens with CLI and access the codes with CLI or a minimalistic web interface.
 
 ## Is it secure or not?
 
-In principle, the main purpose of 2FA is to have the second factor of authentication on a *different* device. It does not imply this device must necessarily be a cell phone. You can put 2FA on another thrusted computer, preferably phisically located in a different city or country. Such strategy could actually make your 2FA more secure than the phone, which could be broken or stolen.
+In principle, the main purpose of 2FA is to have the second factor of authentication on a _different_ device. It does not imply this device must necessarily be a cell phone. You can put 2FA on another thrusted computer, preferably phisically located in a different city or country. Such strategy could actually make your 2FA more secure than the phone, which could be broken or stolen.
 
 ## No warranty
 
@@ -44,4 +73,3 @@ authenticator generate
 ```
 
 or via the web interface at http://localhost:48080
-

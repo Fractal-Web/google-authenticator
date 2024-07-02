@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   google-authenticator:
@@ -6,8 +6,5 @@ services:
     restart: always
     volumes:
       - ${PWD}/authenticator/:/root/.authenticator/
-      - ${PWD}/server:/usr/bin/server
-      - ${PWD}/ThirdParty/extract_otp_secret_keys:/extract_otp_secret_keys
     ports:
       - "127.0.0.1:48080:8080"
-
